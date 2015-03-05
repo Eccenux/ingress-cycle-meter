@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cycle Meter - Ingress</title>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta name="author" content="Maciej Jaros">
+	<meta name="copyright" content="Maciej Jaros">
+	
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+	<script type="text/javascript" src="cycle.js"></script>
+</head>
+<body lang="en">
+    <p>Regional score</p>
+    <label>RES <input type="text" id="res" value="142669"></label>
+    <label>ENL <input type="text" id="enl" value="367359"></label>
+    <p><input type="button" id="calculate" value="calculate" /></p>
+	<p>Minimum to win: <span id="to-win"></span></p>
+
+	<script type="text/javascript">
+		var el = {
+			res : document.getElementById('res'),
+			enl : document.getElementById('enl'),
+			result : document.getElementById('to-win'),
+			calculate : document.getElementById('calculate')
+		};
+		el.calculate.onclick = function() {
+			var cycle = new Cycle();
+			el.result.textContent = cycle.calculateWin(el.res.value, el.enl.value);
+		}
+	</script>
+</body>
+</html>
