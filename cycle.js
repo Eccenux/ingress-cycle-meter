@@ -46,13 +46,33 @@ Cycle.prototype.getCurrentCheckpoint = function () {
 }
 
 /**
+	Convert string to number.
+	
+	Works fine for numbers that cannot have non-integer parts like Ingress MU points.
+*/
+Cycle.prototype.strToInt = function (str) {
+	return parseInt(str.replace(/[,\.\s]/g, ''));
+}
+
+/**
 	Calculates ammount need for loosing faction to win.
 */
 Cycle.prototype.calculateWin = function (res, enl) {
+	res = this.strToInt(res);
+	enl = this.strToInt(enl);
 	var a = this.getCurrentCheckpoint();
 	var x = Math.abs(enl - res);
 	var n = this.checkpointsPerCycle;
 	return a*x/(n-a);
+}
+
+/**
+	Calculates current checkpoint number.
+*/
+Cycle.prototype.getEndDate = function () {
+	var t = new Date();
+	t.setTime(this.end);
+	return t;
 }
 
 /**

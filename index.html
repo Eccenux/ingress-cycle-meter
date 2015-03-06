@@ -17,22 +17,36 @@
 </head>
 <body lang="en">
     <p>Regional score (change manually)</p>
-    <label>RES <input type="text" id="res" value="142669"></label>
-    <label>ENL <input type="text" id="enl" value="367359"></label>
+    <label>RES <input type="text" id="res" value="228 611"></label>
+    <label>ENL <input type="text" id="enl" value="316 037"></label>
     <p><input type="button" id="calculate" value="calculate" /></p>
 	<p>Minimum to defeat current winner: <span id="to-win">...</span></p>
+	<p>Checkpoints past: <span id="chkPast">...</span></p>
+	<p>Checkpoints left: <span id="chkLeft">...</span></p>
+	<p>Cycle end: <span id="cEnd">...</span></p>
 
 	<script type="text/javascript">
 		var el = {
 			res : document.getElementById('res'),
 			enl : document.getElementById('enl'),
 			result : document.getElementById('to-win'),
-			calculate : document.getElementById('calculate')
+			calculate : document.getElementById('calculate'),
+			chkPast : document.getElementById('chkPast'),
+			chkLeft : document.getElementById('chkLeft'),
+			cEnd : document.getElementById('cEnd')
 		};
+		var cycle;
+		function refreshBaseData() {
+			cycle = new Cycle();
+			el.chkPast.textContent = cycle.getCurrentCheckpoint();
+			el.chkLeft.textContent = cycle.checkpointsPerCycle - cycle.getCurrentCheckpoint();
+			el.cEnd.textContent = cycle.getEndDate();
+		}
 		el.calculate.onclick = function() {
-			var cycle = new Cycle();
+			refreshBaseData();
 			el.result.textContent = cycle.calculateWin(el.res.value, el.enl.value);
 		}
+		refreshBaseData();
 	</script>
 </body>
 </html>
