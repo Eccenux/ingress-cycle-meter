@@ -48,7 +48,7 @@
 		}
 		function formatLongInteger(num) {
 			var txt = Math.round(num).toString();
-			return txt.replace(/(\d{3})(?=\d)/g, "$1 ");
+			return txt.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 		}
 		refreshBaseData();
 	</script>
